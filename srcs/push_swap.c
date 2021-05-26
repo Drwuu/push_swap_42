@@ -6,7 +6,7 @@
 /*   By: drwuu <drwuu@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/25 05:10:18 by drwuu            ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 04:29:08 by drwuu            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	write_pile_debug(t_list **a_pile, t_list **b_pile)
 {
-	int	nb;
+	t_list	*temp;
 
-	nb = 0;
-	//*a_pile = ft_lstfirst(*a_pile);
-	while (*a_pile)
+	temp = *a_pile;
+	while (temp)
 	{
-		nb = (*a_pile)->content;
-		ft_putstr_fd(ft_itoa(nb), 1);
+		ft_putstr_fd(ft_itoa(temp->content), 1);
 		ft_putstr_fd("\n", 1);
-		*a_pile = (*a_pile)->next;
+		temp = temp->next;
 	}
 }
 
@@ -55,15 +53,10 @@ void	init_pile(t_list **a_pile, char *str)
 			ft_error(NULL, NULL, "Malloc broke up\n");
 		}
 		ft_lstadd_back(a_pile, new);
-		nb = 0;
 		while (ft_iswhitespace(str[i]))
 			i++;
+		nb = 0;
 	}
-	ft_putstr_fd(ft_itoa((*a_pile)->content), 1);
-	ft_putstr_fd("bouh\n", 1);
-	*a_pile = ft_lstfirst(*a_pile);
-	ft_putstr_fd(ft_itoa((*a_pile)->content), 1);
-	ft_putstr_fd("bouh ouh\n", 1);
 }
 
 t_list	*push_swap(char *str)
@@ -71,15 +64,11 @@ t_list	*push_swap(char *str)
 	t_list	*a_pile;
 	t_list	*b_pile;
 
-	a_pile = ft_lstnew(0, T_INT);
-	// if (!a_pile)
-	// {
-	// 	ft_putstr_fd("coucou\n", 1);
-	// 	ft_error(NULL, NULL, "Malloc broke up\n");
-	// }
+	a_pile = NULL;
 	init_pile(&a_pile, str);
 	write_pile_debug(&a_pile, NULL);
 	swap_a(&a_pile);
+	ft_putstr_fd("swap a\n", 1);
 	write_pile_debug(&a_pile, NULL);
 }
 

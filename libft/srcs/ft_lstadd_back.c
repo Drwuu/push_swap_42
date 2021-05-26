@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
+/*   By: drwuu <drwuu@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/05/26 04:05:06 by drwuu            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include <stdio.h> //remove
 
 void	ft_lstadd_back(t_list **alst, t_list *new)
 {
@@ -23,5 +24,5 @@ void	ft_lstadd_back(t_list **alst, t_list *new)
 		last->next = new;
 	}
 	else
-		*alst = new;
+		 *alst = new;
 }
