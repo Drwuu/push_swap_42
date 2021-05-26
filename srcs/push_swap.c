@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drwuu <drwuu@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/26 04:29:08 by drwuu            ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 15:58:17 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,16 @@
 void	write_pile_debug(t_list **a_pile, t_list **b_pile)
 {
 	t_list	*temp;
+	char	*str;
+	int		nb;
 
+	(void)b_pile;
 	temp = *a_pile;
 	while (temp)
 	{
-		ft_putstr_fd(ft_itoa(temp->content), 1);
+		nb = (int)temp->content;
+		str = ft_itoa(nb);
+		ft_putstr_fd(str, 1);
 		ft_putstr_fd("\n", 1);
 		temp = temp->next;
 	}
@@ -27,7 +32,7 @@ void	write_pile_debug(t_list **a_pile, t_list **b_pile)
 
 void	write_instructions(t_list **a_pile)
 {
-
+	(void)a_pile;
 }
 
 void	init_pile(t_list **a_pile, char *str)
@@ -46,7 +51,7 @@ void	init_pile(t_list **a_pile, char *str)
 			nb = nb * 10 + str[i++] - '0';
 		if (nb > INT_MAX || nb < INT_MIN)
 			ft_error(NULL, NULL, "Error\n");
-		new = ft_lstnew(nb, T_INT);
+		new = ft_lstnew((void *)nb, T_INT);
 		if (!new)
 		{
 			ft_lstclear(a_pile, free);
@@ -65,11 +70,13 @@ t_list	*push_swap(char *str)
 	t_list	*b_pile;
 
 	a_pile = NULL;
+	b_pile = NULL;
 	init_pile(&a_pile, str);
 	write_pile_debug(&a_pile, NULL);
-	swap_a(&a_pile);
-	ft_putstr_fd("swap a\n", 1);
+	sa(&a_pile);
+	ft_putstr_fd("sa\n", 1);
 	write_pile_debug(&a_pile, NULL);
+	return (NULL);
 }
 
 int	main(int ac, char **av)

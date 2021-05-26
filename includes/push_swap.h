@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drwuu <drwuu@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 04:15:21 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/26 01:20:11 by drwuu            ###   ########lyon.fr   */
+/*   Updated: 2021/05/26 15:57:30 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "../libft/includes/libft.h"
-# include <stdio.h> //remove
 
-void	swap_a(t_list **a_pile);
+void	sa(t_list **a_pile);
 
 #endif

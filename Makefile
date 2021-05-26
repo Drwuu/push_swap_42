@@ -1,17 +1,16 @@
 NAME		= push_swap
 
 SRCS		= \
-push_swap.c swap_a.c
+push_swap.c swap.c
 
-VPATH			= $(GNL_PATH) $(INCLUDES) $(LIBFT_PATH) $(SRCS_PATH) $(OBJS_DIR)
+VPATH			= $(INCLUDES) $(LIBFT_PATH) $(SRCS_PATH) $(OBJS_DIR)
 
 FLAGS			= -g -Wall -Wextra -Werror
 OPT				= -O3 -flto -Ofast -ffast-math -march=native 
-INCLUDES		= ./includes
 LIBFT			= -L ./libft -lft
-SRCS_PATH			= ./srcs
+INCLUDES		= ./includes
+SRCS_PATH		= ./srcs
 LIBFT_PATH		= ./libft
-GNL_PATH		= ./libft/gnl
 OBJS_DIR		= ./objects
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
@@ -39,12 +38,11 @@ libs:
 						@make -C ./libft
 
 $(NAME):			$(OBJS)
-						@gcc $(LIBFT) $^ -o $@
+						@gcc $(FLAGS) $(LIBFT) $^ -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
-$(OBJS_DIR)/%.o:	%.c push_swap.h get_next_line.h libft.a
-						@gcc $(OPT) -I$(INCLUDES) -I$(LIBFT_PATH)/includes \
-						-I$(GNL_PATH) -c $< -o $@
+$(OBJS_DIR)/%.o:	%.c push_swap.h libft.a
+						@gcc $(FLAGS) $(OPT) -I$(INCLUDES) -I$(LIBFT_PATH)/includes -c $< -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
 
 linux:				$(OBJS)
