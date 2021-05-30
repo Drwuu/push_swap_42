@@ -6,25 +6,25 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/26 15:58:17 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/05/29 15:11:23 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	write_pile_debug(t_list **a_pile, t_list **b_pile)
+void	write_pile_debug(t_list **pile)
 {
 	t_list	*temp;
 	char	*str;
 	int		nb;
 
-	(void)b_pile;
-	temp = *a_pile;
+	temp = *pile;
 	while (temp)
 	{
 		nb = (int)temp->content;
 		str = ft_itoa(nb);
 		ft_putstr_fd(str, 1);
+		free(str);
 		ft_putstr_fd("\n", 1);
 		temp = temp->next;
 	}
@@ -35,7 +35,7 @@ void	write_instructions(t_list **a_pile)
 	(void)a_pile;
 }
 
-void	init_pile(t_list **a_pile, char *str)
+void	init_a_pile(t_list **a_pile, char *str)
 {
 	t_list	*new;
 	long	nb;
@@ -46,11 +46,11 @@ void	init_pile(t_list **a_pile, char *str)
 	while (str[i]) 
 	{
 		if (!ft_isdigit(str[i]))
-			ft_error(NULL, NULL, "Error\n");
+			ft_error(str, NULL, "Error\n"); // free lst in case of error ?
 		while (ft_isdigit(str[i]))
 			nb = nb * 10 + str[i++] - '0';
 		if (nb > INT_MAX || nb < INT_MIN)
-			ft_error(NULL, NULL, "Error\n");
+			ft_error(str, NULL, "Error\n"); // free lst in case of error ?
 		new = ft_lstnew((void *)nb, T_INT);
 		if (!new)
 		{
@@ -71,18 +71,40 @@ t_list	*push_swap(char *str)
 
 	a_pile = NULL;
 	b_pile = NULL;
-	init_pile(&a_pile, str);
-	write_pile_debug(&a_pile, NULL);
+	init_a_pile(&a_pile, str);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
 	sa(&a_pile);
 	ft_putstr_fd("sa\n", 1);
-	write_pile_debug(&a_pile, NULL);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	pb(&a_pile, &b_pile);
+	ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("write pile b\n", 1);
+	write_pile_debug(&b_pile);
+	ft_lstclear(&a_pile, free);
+	ft_lstclear(&b_pile, free);
 	return (NULL);
 }
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-		return (0);
-	else
+	char	*arg;
+	int		i;
+
+	arg = NULL;
+	i = 2;
+	if (ac == 2)
 		push_swap(av[1]);
+	else if (ac > 2)
+	{
+		arg = ft_strdup(av[1]);
+		while (i < ac)
+			arg = ft_strjoin_with_sep(arg, av[i++], ' ');
+		push_swap(arg);
+		free(arg);
+	}
+	return (0);
 }

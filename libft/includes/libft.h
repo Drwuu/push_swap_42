@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 20:31:31 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/26 15:53:20 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/05/29 15:20:00 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			*ft_calloc(size_t size, size_t count);
 char			*ft_strdup(const char *s1);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_with_sep(char *s1, char const *s2, char c);
 char			*ft_strtrim(char const *s1, char const *set);
 char			**ft_split(const char *s, const char *sep);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -131,7 +132,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *), \
 					void (*del)(void *));
 void			ft_lstadd_front(t_list **alst, t_list *new);
 void			ft_lstadd_back(t_list **alst, t_list *new);
-void			ft_lstdelone(t_list *lst, void (*del)(void*));
+void			ft_lstdelone(t_list **lst, void (*del)(void*));
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 void			ft_lstiter(t_list *lst, void (*f)(void *));
 int				ft_lstsize(t_list *lst);

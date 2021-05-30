@@ -14,7 +14,7 @@ ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstclear.c ft_lstdelone.c \
 ft_lstiter.c ft_lstmap.c ft_lstnew_addback.c \
 ft_math.c ft_vec3_sub.c ft_vec3_create.c ft_vec3_normalize.c \
 ft_color.c ft_get_time.c ft_error.c get_next_line_utils_2.c get_next_line_utils.c \
-get_next_line.c
+get_next_line.c ft_strjoin_with_sep.c
 
 VPATH			= srcs includes $(MATH) $(GRAPHIC) $(TIME) $(GNL)
 

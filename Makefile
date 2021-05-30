@@ -1,18 +1,19 @@
 NAME		= push_swap
 
 SRCS		= \
-push_swap.c swap.c
+push_swap.c swap.c push.c
 
 VPATH			= $(INCLUDES) $(LIBFT_PATH) $(SRCS_PATH) $(OBJS_DIR)
 
 FLAGS			= -g -Wall -Wextra -Werror
 OPT				= -O3 -flto -Ofast -ffast-math -march=native 
 LIBFT			= -L ./libft -lft
+OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+
 INCLUDES		= ./includes
 SRCS_PATH		= ./srcs
 LIBFT_PATH		= ./libft
 OBJS_DIR		= ./objects
-OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 BLACK			=	\033[0;30m
 RED				=	\033[0;31m

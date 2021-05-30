@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/29 16:01:08 by lwourms          ###   ########.fr       */
+/*   Created: 2021/05/25 00:25:04 by drwuu             #+#    #+#             */
+/*   Updated: 2021/05/29 15:21:31 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../includes/push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+void	pa(t_list **a_pile, t_list **b_pile)
 {
-	t_list	*save;
+	if (*b_pile)
+		ft_lstadd_front(a_pile, *b_pile);
+}
 
-	if (!*lst)
-		return ;
-	while (*lst)
+void	pb(t_list **a_pile, t_list **b_pile)
+{
+	if (*a_pile)
 	{
-		save = (*lst)->next;
-		dprintf(1, "lstclear content = %d\n", (int)(*lst)->content);
-		ft_lstdelone(lst, del);
-		*lst = save;
+		*b_pile = ft_lstnew((*a_pile)->content, T_INT);
+		ft_lstdelone(a_pile, free);
 	}
-	*lst = NULL;
 }
