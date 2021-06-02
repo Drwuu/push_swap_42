@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 20:31:31 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/29 15:20:00 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/02 17:11:43 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 void			**ft_free_dbl_array(void **datas, int size_nullable);
 void			ft_error(void *to_free, void **to_free_2, \
-					const char *msg_error);
+				t_list **lst_nullable, const char *msg_error);
 
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);

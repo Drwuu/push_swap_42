@@ -1,19 +1,19 @@
 NAME		= push_swap
 
 SRCS		= \
-push_swap.c swap.c push.c
+push_swap.c push.c swap.c rotate.c rotate_2.c
 
-VPATH			= $(INCLUDES) $(LIBFT_PATH) $(SRCS_PATH) $(OBJS_DIR)
-
-FLAGS			= -g -Wall -Wextra -Werror
-OPT				= -O3 -flto -Ofast -ffast-math -march=native 
-LIBFT			= -L ./libft -lft
+FLAGS			= -Wall -Wextra -Werror
+OPT				= -O3 -flto -Ofast -ffast-math -march=native
+LIBFT			= -L libft -lft
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-INCLUDES		= ./includes
-SRCS_PATH		= ./srcs
-LIBFT_PATH		= ./libft
-OBJS_DIR		= ./objects
+OBJS_DIR		= objects
+INCLUDES		= includes
+LIBFT_PATH		= libft
+
+FILES			= srcs
+FOLDERS			= objects
 
 BLACK			=	\033[0;30m
 RED				=	\033[0;31m
@@ -35,37 +35,35 @@ NO_COLOR		=	\033[0m
 
 all:				libs $(NAME)
 
-libs:		
+libs:
 						@make -C ./libft
 
 $(NAME):			$(OBJS)
 						@gcc $(FLAGS) $(LIBFT) $^ -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
-$(OBJS_DIR)/%.o:	%.c push_swap.h libft.a
-						@gcc $(FLAGS) $(OPT) -I$(INCLUDES) -I$(LIBFT_PATH)/includes -c $< -o $@
+$(OBJS_DIR)/%.o:	$(FILES)/%.c $(addprefix $(INCLUDES)/, push_swap.h) $(LIBFT_PATH)/libft.a
+						@mkdir -p $(addprefix $(OBJS_DIR)/, $(FOLDERS))
+						@gcc $(FLAGS) $(OPT) -I$(INCLUDES) -I$(LIBFT_PATH)/$(INCLUDES) -c $< -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
 
-linux:				$(OBJS)
-						@gcc $(LIBFT) $^ -o $(NAME)
+lldb:				libs $(OBJS)
+						@gcc -g $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
-lldb:				$(OBJS)
-						@gcc -g $(FLAGS) $(LIBFT) $^ -o $(NAME)
-						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
-
-fsanitize:			$(OBJS)
-						@gcc -fsanitize=address $(FLAGS) $(LIBFT) $^ -o $(NAME)
+fsanitize:			libs $(OBJS)
+						@gcc -fsanitize=address $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
 clean:
 						@rm -f $(OBJS)
+						@rm -rf $(addprefix ./, $(FOLDERS))
 						@make -C $(LIBFT_PATH) clean
 
 fclean:				clean
 						@rm -f $(NAME)
-						@make -C $(LIBFT_PATH) fclean 
+						@make -C $(LIBFT_PATH) fclean
 
 re:					fclean all
 
-.PHONY:				all clean fclean re libs
+.PHONY:				all clean fclean re libs lldb fsanitize $(NAME)

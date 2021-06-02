@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/29 15:11:23 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/02 20:58:02 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,17 @@ void	init_a_pile(t_list **a_pile, char *str)
 
 	i = 0;
 	nb = 0;
-	while (str[i]) 
+	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			ft_error(str, NULL, "Error\n"); // free lst in case of error ?
+			ft_error(str, NULL, a_pile, "Error\n");
 		while (ft_isdigit(str[i]))
 			nb = nb * 10 + str[i++] - '0';
 		if (nb > INT_MAX || nb < INT_MIN)
-			ft_error(str, NULL, "Error\n"); // free lst in case of error ?
+			ft_error(str, NULL, a_pile, "Error\n");
 		new = ft_lstnew((void *)nb, T_INT);
 		if (!new)
-		{
-			ft_lstclear(a_pile, free);
-			ft_error(NULL, NULL, "Malloc broke up\n");
-		}
+			ft_error(str, NULL, a_pile, "Malloc broke up\n");
 		ft_lstadd_back(a_pile, new);
 		while (ft_iswhitespace(str[i]))
 			i++;
@@ -74,16 +71,71 @@ t_list	*push_swap(char *str)
 	init_a_pile(&a_pile, str);
 	ft_putstr_fd("write pile a\n", 1);
 	write_pile_debug(&a_pile);
-	sa(&a_pile);
+	ft_putstr_fd("\n", 1);
+
+
 	ft_putstr_fd("sa\n", 1);
+	sa(&a_pile);
 	ft_putstr_fd("write pile a\n", 1);
 	write_pile_debug(&a_pile);
-	pb(&a_pile, &b_pile);
+	ft_putstr_fd("\n", 1);
+
+
 	ft_putstr_fd("pb\n", 1);
+	// ft_putstr_fd("pb\n", 1);
+	// ft_putstr_fd("pb\n", 1);
+	// pb(&a_pile, &b_pile, str);
+	// pb(&a_pile, &b_pile, str);
+	pb(&a_pile, &b_pile, str);
 	ft_putstr_fd("write pile a\n", 1);
 	write_pile_debug(&a_pile);
 	ft_putstr_fd("write pile b\n", 1);
 	write_pile_debug(&b_pile);
+	ft_putstr_fd("\n", 1);
+
+
+	ft_putstr_fd("pa\n", 1);
+	ft_putstr_fd("pa\n", 1);
+	pa(&a_pile, &b_pile, str);
+	pa(&a_pile, &b_pile, str);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("write pile b\n", 1);
+	write_pile_debug(&b_pile);
+	ft_putstr_fd("\n", 1);
+
+
+	ft_putstr_fd("pb\n", 1);
+	ft_putstr_fd("pb\n", 1);
+	pb(&a_pile, &b_pile, str);
+	pb(&a_pile, &b_pile, str);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("write pile b\n", 1);
+	write_pile_debug(&b_pile);
+	ft_putstr_fd("\n", 1);
+
+	ft_putstr_fd("ra\n", 1);
+	ra(&a_pile);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("\n", 1);
+
+
+	ft_putstr_fd("rra\n", 1);
+	rra(&a_pile);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("\n", 1);
+
+
+	ft_putstr_fd("rra\n", 1);
+	rra(&a_pile);
+	ft_putstr_fd("write pile a\n", 1);
+	write_pile_debug(&a_pile);
+	ft_putstr_fd("\n", 1);
+
+
 	ft_lstclear(&a_pile, free);
 	ft_lstclear(&b_pile, free);
 	return (NULL);

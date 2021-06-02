@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/29 16:01:08 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/02 15:42:42 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void*))
 	while (*lst)
 	{
 		save = (*lst)->next;
-		dprintf(1, "lstclear content = %d\n", (int)(*lst)->content);
 		ft_lstdelone(lst, del);
 		*lst = save;
 	}
