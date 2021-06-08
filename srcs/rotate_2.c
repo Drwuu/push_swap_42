@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 00:25:04 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/02 20:13:59 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/08 17:51:26 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ra(t_list **a_pile)
 		temp->content = temp->next->content;
 		temp = temp->next;
 	}
+	ft_putstr_fd("ra\n", 1);
 }
 
 void	rb(t_list **b_pile)
@@ -48,10 +49,12 @@ void	rb(t_list **b_pile)
 		temp->content = temp->next->content;
 		temp = temp->next;
 	}
+	ft_putstr_fd("rb\n", 1);
 }
 
 void	rr(t_list **a_pile, t_list **b_pile)
 {
 	ra(a_pile);
 	rb(b_pile);
+	ft_putstr_fd("rr\n", 1);
 }

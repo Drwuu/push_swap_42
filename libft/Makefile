@@ -11,7 +11,7 @@ ft_putnbr_fd.c ft_strdup.c ft_strlen.c ft_strrchr.c ft_toupper.c ft_calloc.c \
 ft_isdigit.c ft_memchr.c ft_memset.c ft_putstr_fd.c ft_strjoin.c ft_strmapi.c \
 ft_strtrim.c ft_chr_index.c ft_char_to_str.c ft_lstnew.c ft_lstadd_front.c \
 ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstclear.c ft_lstdelone.c \
-ft_lstiter.c ft_lstmap.c ft_lstnew_addback.c \
+ft_lstiter.c ft_lstmap.c \
 ft_math.c ft_vec3_sub.c ft_vec3_create.c ft_vec3_normalize.c \
 ft_color.c ft_get_time.c ft_error.c get_next_line_utils_2.c get_next_line_utils.c \
 get_next_line.c ft_strjoin_with_sep.c
@@ -26,7 +26,7 @@ INCLUDES		= ./includes
 OBJS_DIR		= ./objects
 
 FLAGS			= -Wall -Wextra -Werror
-OPT				= -O3 -flto -Ofast -ffast-math -march=native 
+OPT				= -O3 -flto -Ofast -ffast-math -march=native
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 BLACK			=	\033[0;30m
@@ -54,11 +54,13 @@ $(NAME):			$(OBJS)
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUEE): $(GREEN)Compiled [√]$(RESET)\n"
 
 $(OBJS_DIR)/%.o:	%.c libft.h split_utils.h get_next_line.h
-						@gcc $(FLAGS) $(OPT) -I$(INCLUDES) -c $< -o $@
+						@mkdir -p $(OBJS_DIR)
+						@gcc $(FLAGS) -I$(INCLUDES) -c $< -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
 
 clean:
 						@rm -f $(OBJS)
+						@rm -rf $(OBJS_DIR)
 
 fclean:				clean
 						@rm -f $(NAME)

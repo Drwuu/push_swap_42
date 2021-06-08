@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 02:04:23 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/02 17:10:52 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/08 19:26:23 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ const char *msg_error)
 		free(to_free);
 	if (to_free_2)
 		ft_free_dbl_array(to_free_2, 0);
-	if (lst_nullable)
-		ft_lstclear(lst_nullable, free);
-	ft_putstr_fd((char *)msg_error, 1);
+	if (*lst_nullable || lst_nullable)
+		ft_lstclear(lst_nullable);
+	ft_putstr_fd((char *)msg_error, 2);
 	exit(0);
 }

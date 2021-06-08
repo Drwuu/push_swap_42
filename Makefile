@@ -1,19 +1,55 @@
 NAME		= push_swap
 
 SRCS		= \
-push_swap.c push.c swap.c rotate.c rotate_2.c
+push_swap.c push.c swap.c rotate.c rotate_2.c random_nb_3.c
+
+VPATH			= $(OBJS_DIR) $(INCLUDES) $(LIBFT_INC) $(FILES) $(FOLDERS) $(LIBFT_PATH)
+
+FILES			= ./srcs
+LIBFT_PATH		= ./libft
+INCLUDES		= ./includes
+OBJS_DIR		= ./objects
+FOLDERS			= $(FILES)/algorithm
 
 FLAGS			= -Wall -Wextra -Werror
 OPT				= -O3 -flto -Ofast -ffast-math -march=native
 LIBFT			= -L libft -lft
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
-OBJS_DIR		= objects
-INCLUDES		= includes
-LIBFT_PATH		= libft
+all:				libs $(NAME)
 
-FILES			= srcs
-FOLDERS			= objects
+libs:
+						@make -C ./libft
+
+$(NAME):			$(OBJS)
+						@gcc $(FLAGS) $(LIBFT) $^ -o $@
+						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
+
+$(OBJS_DIR)/%.o:	%.c push_swap.h libft.a
+						@mkdir -p $(OBJS_DIR)
+						@gcc $(FLAGS) -I$(INCLUDES) -c $< -o $@
+						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
+
+lldb:				libs $(OBJS)
+						@gcc -g $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
+						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
+
+fsanitize:			libs $(OBJS)
+						@gcc -fsanitize=address $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
+						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
+
+clean:
+						@rm -f $(OBJS)
+						@rm -rf $(OBJS_DIR)
+						@make -C $(LIBFT_PATH) clean
+
+fclean:				clean
+						@rm -f $(NAME)
+						@make -C $(LIBFT_PATH) fclean
+
+re:					fclean all
+
+.PHONY:				all clean fclean re libs lldb fsanitize
 
 BLACK			=	\033[0;30m
 RED				=	\033[0;31m
@@ -32,38 +68,3 @@ LIGHT_PURPLE	=	\033[1;35m
 LIGHT_CYAN		=	\033[1;36m
 WHITE			=	\033[1;37m
 NO_COLOR		=	\033[0m
-
-all:				libs $(NAME)
-
-libs:
-						@make -C ./libft
-
-$(NAME):			$(OBJS)
-						@gcc $(FLAGS) $(LIBFT) $^ -o $@
-						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
-
-$(OBJS_DIR)/%.o:	$(FILES)/%.c $(addprefix $(INCLUDES)/, push_swap.h) $(LIBFT_PATH)/libft.a
-						@mkdir -p $(addprefix $(OBJS_DIR)/, $(FOLDERS))
-						@gcc $(FLAGS) $(OPT) -I$(INCLUDES) -I$(LIBFT_PATH)/$(INCLUDES) -c $< -o $@
-						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
-
-lldb:				libs $(OBJS)
-						@gcc -g $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
-						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
-
-fsanitize:			libs $(OBJS)
-						@gcc -fsanitize=address $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
-						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
-
-clean:
-						@rm -f $(OBJS)
-						@rm -rf $(addprefix ./, $(FOLDERS))
-						@make -C $(LIBFT_PATH) clean
-
-fclean:				clean
-						@rm -f $(NAME)
-						@make -C $(LIBFT_PATH) fclean
-
-re:					fclean all
-
-.PHONY:				all clean fclean re libs lldb fsanitize $(NAME)

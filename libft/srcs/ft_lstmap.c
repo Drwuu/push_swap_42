@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/08 17:25:10 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list **first_elem)
 	return (1);
 }
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *))
 {
 	t_list	*new_list;
 	t_list	*first_elem;
@@ -38,7 +38,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 		new_list->next = ft_lstnew(f(lst->content), lst->type);
 		if (!new_list->next)
 		{
-			ft_lstclear(&first_elem, del);
+			ft_lstclear(&first_elem);
 			return (NULL);
 		}
 		lst->previous = lst;
