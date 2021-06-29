@@ -1,15 +1,15 @@
 NAME		= push_swap
 
 SRCS		= \
-push_swap.c push.c swap.c rotate.c rotate_2.c random_nb_3.c
+push_swap.c push.c swap.c rotate.c rotate_2.c utils.c utils_2.c utils_3.c sort.c \
+last_sort.c last_sort_2.c algorithm.c
 
-VPATH			= $(OBJS_DIR) $(INCLUDES) $(LIBFT_INC) $(FILES) $(FOLDERS) $(LIBFT_PATH)
+VPATH			= $(OBJS_DIR) $(FILES) $(INCLUDES) $(LIBFT_INC) $(LIBFT_PATH)
 
+OBJS_DIR		= ./objects
 FILES			= ./srcs
 LIBFT_PATH		= ./libft
 INCLUDES		= ./includes
-OBJS_DIR		= ./objects
-FOLDERS			= $(FILES)/algorithm
 
 FLAGS			= -Wall -Wextra -Werror
 OPT				= -O3 -flto -Ofast -ffast-math -march=native
@@ -30,12 +30,12 @@ $(OBJS_DIR)/%.o:	%.c push_swap.h libft.a
 						@gcc $(FLAGS) -I$(INCLUDES) -c $< -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"
 
-lldb:				libs $(OBJS)
-						@gcc -g $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
+lldb:				$(OBJS)
+						@gcc -g $(FLAGS) $(LIBFT) $^ -o $(NAME)
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
-fsanitize:			libs $(OBJS)
-						@gcc -fsanitize=address $(FLAGS) $(MLX) $(LIBFT) $(OBJS) -o $(NAME)
+fsanitize:			$(OBJS)
+						@gcc -fsanitize=address $(FLAGS) $(LIBFT) $^ -o $(NAME)
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
 clean:
@@ -49,7 +49,7 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:				all clean fclean re libs lldb fsanitize
+.PHONY:				all clean fclean re
 
 BLACK			=	\033[0;30m
 RED				=	\033[0;31m

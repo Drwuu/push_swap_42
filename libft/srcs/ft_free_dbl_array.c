@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_dbl_array.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drwuu <drwuu@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:22:19 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/25 02:26:30 by drwuu            ###   ########lyon.fr   */
+/*   Updated: 2021/06/29 16:21:44 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 void	**ft_free_dbl_array(void **datas, int size_nullable)
 {
@@ -22,13 +23,13 @@ void	**ft_free_dbl_array(void **datas, int size_nullable)
 		while (i < size_nullable)
 		{
 			if (datas[i])
-				free(datas[i]);
+				wrfree(datas[i]);
 			i++;
 		}
 	}
 	else
 		while (datas[i])
-			free(datas[i++]);
-	free(datas);
+			wrfree(datas[i++]);
+	wrfree(datas);
 	return (NULL);
 }

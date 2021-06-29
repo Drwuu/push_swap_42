@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/26 12:32:04 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_lstsize(t_list *lst)
 	int	i;
 
 	i = 0;
+	if (!lst)
+		return (0);
 	while (lst)
 	{
 		lst = lst->next;

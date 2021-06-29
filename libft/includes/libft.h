@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 20:31:31 by lwourms           #+#    #+#             */
-/*   Updated: 2021/06/08 17:25:24 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 19:32:23 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 # include <math.h>
 # include <limits.h>
 # include <sys/time.h>
-# include <stdio.h> //remove
+# include "stdio.h"
 
 typedef struct s_vec3
 {
-	float	x;
+	float	x; //remove stdio
 	float	y;
 	float	z;
 }	t_vec3;
@@ -72,6 +72,9 @@ typedef struct s_list
 
 float			ft_radian(float angle);
 
+t_bool			ft_is_smaller(int nb1, int nb2);
+t_bool			ft_is_equal(int nb1, int nb2);
+t_bool			ft_is_greater(int nb1, int nb2);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
 int				ft_ischar(const char *s, const char *c);
@@ -124,6 +127,7 @@ void			ft_putstr_at_fd(const char *s, int start, int end, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 
+t_list			*ft_lstlast_to(t_list *last, int count);
 t_list			*ft_lstnew(void *content, t_type type);
 t_list			*ft_lstnew_addback(t_list **alst, void *content);
 t_list			*ft_lstlast(t_list *lst);
@@ -140,8 +144,11 @@ t_vec3			ft_vec3_create(float x, float y, float z);
 t_vec3			ft_vec3_sub(t_vec3 vec_1, t_vec3 vec_2);
 t_vec3			ft_vec3_normalize(t_vec3 vector);
 
-t_color			ft_create_color(unsigned char a, unsigned char r, unsigned char g, \
-				unsigned char b);
+t_color			ft_create_color(unsigned char a, unsigned char r, \
+					unsigned char g, unsigned char b);
 long long		ft_get_time(void);
+
+void			ft_sort_array_ascending(int **pt_array, int size);
+void			ft_sort_array_descending(int **pt_array, int size);
 
 #endif

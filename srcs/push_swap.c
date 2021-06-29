@@ -6,209 +6,71 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/08 19:32:05 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 18:11:26 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	write_pile_debug(t_list **pile)
+static void	init_a_pile_process(t_datas *datas, int *i, long *nb)
 {
-	t_list	*temp;
-	char	*str;
-	int		nb;
+	int	neg;
 
-	temp = *pile;
-	while (temp)
+	neg = 1;
+	if ((*datas).str[*i] == '-')
 	{
-		nb = (int)temp->content;
-		str = ft_itoa(nb);
-		ft_putstr_fd(str, 1);
-		free(str);
-		ft_putstr_fd("\n", 1);
-		temp = temp->next;
+		neg = -1;
+		*i += 1;
 	}
+	if (!ft_isdigit((*datas).str[*i]))
+		error_manager(datas, "Error\n");
+	while (ft_isdigit((*datas).str[*i]))
+	{
+		*nb = *nb * 10 + (*datas).str[*i] - '0';
+		*i += 1;
+	}
+	*nb *= neg;
+	if (*nb > INT_MAX || *nb < INT_MIN || already_exists((*datas).a_pile, *nb))
+		error_manager(datas, "Error\n");
+	neg = 1;
 }
 
-static t_bool	is_already_present(t_list *pile, int nb)
-{
-	while (pile)
-	{
-		if (nb == (int)pile->content)
-			return (TRUE);
-		pile = pile->next;
-	}
-	return (FALSE);
-}
-
-void	init_a_pile(t_list **a_pile, char *str)
+void	init_a_pile(t_datas *datas)
 {
 	t_list	*new;
 	long	nb;
-	int		neg;
 	int		i;
 
 	i = 0;
 	nb = 0;
-	neg = 1;
-	while (str[i])
+	while ((*datas).str[i])
 	{
-		if (!ft_isdigit(str[i]))
-			ft_error(str, NULL, a_pile, "Error\n");
-		if (str[i] == '-')
-			neg = -1;
-		while (ft_isdigit(str[i]))
-		{
-			nb = nb * 10 + str[i++] - '0';
-			nb *= neg;
-		}
-		if (nb > INT_MAX || nb < INT_MIN || is_already_present(*a_pile, nb))
-			ft_error(str, NULL, a_pile, "Error\n");
+		init_a_pile_process(datas, &i, &nb);
 		new = ft_lstnew((void *)nb, T_INT);
 		if (!new)
-			ft_error(str, NULL, a_pile, "Malloc broke up\n");
-		ft_lstadd_back(a_pile, new);
-		while (ft_iswhitespace(str[i]))
+			error_manager(datas, "Malloc broke up\n");
+		ft_lstadd_back(&((*datas).a_pile), new);
+		while (ft_iswhitespace((*datas).str[i]))
 			i++;
 		nb = 0;
-		neg = 1;
 	}
 }
 
 t_list	*push_swap(char *str)
 {
-	t_list	*a_pile;
-	t_list	*b_pile;
+	t_datas	datas;
 
-	a_pile = NULL;
-	b_pile = NULL;
-	init_a_pile(&a_pile, str);
-
-	algorithm(&a_pile, &b_pile, str);
-	ft_putstr_fd("\n", 1);
-
-	ft_putstr_fd("write pile a\n", 1);
-	write_pile_debug(&a_pile);
-	ft_putstr_fd("\n", 1);
-
-	ft_putstr_fd("write pile b\n", 1);
-	write_pile_debug(&b_pile);
-	ft_putstr_fd("\n", 1);
-
-	push_full(&a_pile, &b_pile, str);
-	ft_putstr_fd("write pile a\n", 1);
-	write_pile_debug(&a_pile);
-	ft_putstr_fd("\n", 1);
-
-	// ft_putstr_fd("sa\n", 1);
-	// sa(&a_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("pb\n", 1);
-	// pb(&a_pile, &b_pile, str);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("pa\n", 1);
-	// ft_putstr_fd("pa\n", 1);
-	// pa(&a_pile, &b_pile, str);
-	// pa(&a_pile, &b_pile, str);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("pb\n", 1);
-	// ft_putstr_fd("pb\n", 1);
-	// pb(&a_pile, &b_pile, str);
-	// pb(&a_pile, &b_pile, str);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("sb\n", 1);
-	// sb(&b_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("ss\n", 1);
-	// ss(&a_pile, &b_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("ra\n", 1);
-	// ra(&a_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rra\n", 1);
-	// rra(&a_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rra\n", 1);
-	// rra(&a_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rrb\n", 1);
-	// rrb(&b_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rrb\n", 1);
-	// rrb(&b_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rb\n", 1);
-	// rb(&b_pile);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	// ft_putstr_fd("rrr\n", 1);
-	// rrr(&a_pile, &b_pile);
-	// ft_putstr_fd("write pile a\n", 1);
-	// write_pile_debug(&a_pile);
-	// ft_putstr_fd("\n", 1);
-	// ft_putstr_fd("write pile b\n", 1);
-	// write_pile_debug(&b_pile);
-	// ft_putstr_fd("\n", 1);
-
-
-	ft_lstclear(&a_pile);
-	ft_lstclear(&b_pile);
+	datas.str = str;
+	datas.a_pile = NULL;
+	datas.b_pile = NULL;
+	datas.chunk = NULL;
+	init_a_pile(&datas);
+	algorithm(&datas);
+	// dprintf(1, "push swap | printing pile a...\n");
+	// write_pile_debug(datas.a_pile);
+	// dprintf(1, "push swap | printing pile b...\n");
+	write_pile_debug(datas.b_pile);
+	free_manager(&datas);
 	return (NULL);
 }
 
@@ -218,6 +80,8 @@ int	main(int ac, char **av)
 	int		i;
 
 	i = 2;
+	if (ac == 1)
+		return (0);
 	arg = ft_strdup(av[1]);
 	if (!arg)
 		ft_error(NULL, NULL, NULL, "Malloc broke up\n");
@@ -233,6 +97,6 @@ int	main(int ac, char **av)
 		}
 		push_swap(arg);
 	}
-	free(arg);
+	wrdestroy();
 	return (0);
 }

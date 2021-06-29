@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 00:51:53 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/08 17:29:53 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 16:21:29 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 static void	del_content(t_list *element)
 {
@@ -18,7 +19,7 @@ static void	del_content(t_list *element)
 	{
 		if (element->content)
 		{
-			free(element->content);
+			wrfree(element->content);
 			element->content = NULL;
 		}
 	}
@@ -29,13 +30,13 @@ static void	process_2(t_list **lst, t_list *save)
 	if (save)
 	{
 		del_content(save);
-		free(save);
+		wrfree(save);
 		save = NULL;
 	}
 	else
 	{
 		del_content(*lst);
-		free(*lst);
+		wrfree(*lst);
 		*lst = NULL;
 	}
 }

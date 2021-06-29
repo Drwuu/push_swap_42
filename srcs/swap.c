@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 00:25:04 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/08 17:52:06 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 13:08:49 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sa(t_list **a_pile)
 {
-	void *temp;
+	void	*temp;
 
 	temp = NULL;
 	if (*a_pile && (*a_pile)->next)
@@ -28,7 +28,7 @@ void	sa(t_list **a_pile)
 
 void	sb(t_list **b_pile)
 {
-	void *temp;
+	void	*temp;
 
 	temp = NULL;
 	if (*b_pile && (*b_pile)->next)
