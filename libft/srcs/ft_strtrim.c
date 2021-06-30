@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/11 15:13:34 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 20:46:50 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:35:17 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 static int	is_set(char const *set, char const c)
 {
@@ -28,7 +29,7 @@ static int	is_set(char const *set, char const c)
 
 static char	*malloc_error(char *str)
 {
-	str = malloc(1);
+	str = wrmalloc(1);
 	if (!str)
 		return (NULL);
 	str[0] = 0;
@@ -39,7 +40,7 @@ static int	process(char **str, char const *s1, int start, int end)
 {
 	int	i;
 
-	*str = malloc(sizeof(**str) * (end - start + 2));
+	*str = wrmalloc(sizeof(**str) * (end - start + 2));
 	if (!*str)
 		return (0);
 	i = 0;

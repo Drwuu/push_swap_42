@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 01:15:35 by drwuu             #+#    #+#             */
-/*   Updated: 2021/06/29 18:11:26 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:23:22 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ t_list	*push_swap(char *str)
 	datas.chunk = NULL;
 	init_a_pile(&datas);
 	algorithm(&datas);
-	// dprintf(1, "push swap | printing pile a...\n");
-	// write_pile_debug(datas.a_pile);
-	// dprintf(1, "push swap | printing pile b...\n");
-	write_pile_debug(datas.b_pile);
 	free_manager(&datas);
 	return (NULL);
 }

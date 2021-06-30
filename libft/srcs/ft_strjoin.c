@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 18:39:24 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 20:37:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:35:08 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -20,7 +21,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (0);
-	str = malloc((sizeof(*str) * ((ft_strlen(s1) + \
+	str = wrmalloc((sizeof(*str) * ((ft_strlen(s1) + \
 		ft_strlen(s2)) + 1)));
 	if (!str)
 		return (NULL);

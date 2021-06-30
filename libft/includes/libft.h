@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 20:31:31 by lwourms           #+#    #+#             */
-/*   Updated: 2021/06/29 19:32:23 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:23:13 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@
 # include <math.h>
 # include <limits.h>
 # include <sys/time.h>
-# include "stdio.h"
 
 typedef struct s_vec3
 {
-	float	x; //remove stdio
+	float	x;
 	float	y;
 	float	z;
 }	t_vec3;

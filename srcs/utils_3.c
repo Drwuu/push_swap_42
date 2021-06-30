@@ -6,13 +6,13 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:43:26 by lwourms           #+#    #+#             */
-/*   Updated: 2021/06/29 19:14:26 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:24:03 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		find_greater_nb(t_list *first_pile)
+int	find_greater_nb(t_list *first_pile)
 {
 	int	greater_nb;
 
@@ -26,7 +26,7 @@ int		find_greater_nb(t_list *first_pile)
 	return (greater_nb);
 }
 
-int		find_smaller_nb(t_list *first_pile)
+int	find_smaller_nb(t_list *first_pile)
 {
 	int	smaller_nb;
 

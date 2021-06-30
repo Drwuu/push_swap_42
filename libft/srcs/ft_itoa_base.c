@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 18:33:01 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:34:43 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 static int	find_n_len(unsigned long long n, int b_size)
 {
@@ -48,7 +49,7 @@ char	*ft_itoa_base(const char *base, unsigned long long n)
 
 	b_size = ft_strlen(base);
 	n_len = find_n_len(n, b_size);
-	result = malloc(sizeof(*result) * (n_len + 1));
+	result = wrmalloc(sizeof(*result) * (n_len + 1));
 	if (!result)
 		return (NULL);
 	convert_process(n, result, n_len, base);

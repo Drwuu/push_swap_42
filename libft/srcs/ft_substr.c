@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 18:42:40 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 20:48:29 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:35:22 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 static int	find_real_len(char const *s, size_t len, unsigned int start)
 {
@@ -34,13 +35,13 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (0);
 	if ((size_t)start >= ft_strlen(s))
 	{
-		str = malloc(1);
+		str = wrmalloc(1);
 		if (!str)
 			return (NULL);
 		str[0] = '\0';
 		return (str);
 	}
-	str = malloc(sizeof(*str) * (find_real_len(s, len, start) + 1));
+	str = wrmalloc(sizeof(*str) * (find_real_len(s, len, start) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;

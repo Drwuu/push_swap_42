@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/23 17:43:26 by lwourms           #+#    #+#             */
-/*   Updated: 2021/06/29 19:26:37 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:26:44 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	count_asc_move(t_list *pile, int nb, t_bool f(int, int))
 	count = 0;
 	while (pile)
 	{
-		// if ((int)pile->content < nb)
 		if (f((int)pile->content, nb))
 			break ;
 		pile = pile->next;
@@ -53,19 +52,14 @@ static int	count_asc_move(t_list *pile, int nb, t_bool f(int, int))
 static int	count_dsc_move(t_list *pile, int nb, t_bool f(int, int))
 {
 	t_list	*last;
-	int	count;
+	int		count;
 
 	count = 1;
 	last = ft_lstlast(pile);
 	while (last)
 	{
-		// dprintf(1, "count dsc move | last pile elem = %d\n", (int)last->content);
 		if (f((int)last->content, nb))
-		{
-			// dprintf(1, "count dsc move | last content < mid value = %d\n", (int)last->content);
-			// dprintf(1, "count dsc move | count = %d\n", count);
 			break ;
-		}
 		last = last->previous;
 		count++;
 	}

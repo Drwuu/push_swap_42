@@ -6,12 +6,13 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:28 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:41 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:35:00 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/split_utils.h"
+#include "../includes/wr_malloc.h"
 
 int	is_sep(const char *str, const char *sep, int i)
 {
@@ -77,7 +78,7 @@ char	*build_str(const char *str, const char *sep, int i)
 	int		k;
 
 	size = char_nbr(str, sep, i);
-	build_str = malloc(sizeof(*build_str) * (size + 1));
+	build_str = wrmalloc(sizeof(*build_str) * (size + 1));
 	if (!build_str)
 		return (NULL);
 	j = 0;

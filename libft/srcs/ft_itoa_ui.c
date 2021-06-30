@@ -6,11 +6,12 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 18:33:01 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 19:08:04 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:34:54 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
+#include "../includes/wr_malloc.h"
 
 static int	findnbrlen(unsigned int n)
 {
@@ -39,7 +40,7 @@ char	*ft_itoa_ui(unsigned int n)
 	int					i;
 
 	len = findnbrlen(n);
-	nbr = malloc(sizeof(*nbr) * (len + 1));
+	nbr = wrmalloc(sizeof(*nbr) * (len + 1));
 	if (!nbr)
 		return (NULL);
 	i = 0;

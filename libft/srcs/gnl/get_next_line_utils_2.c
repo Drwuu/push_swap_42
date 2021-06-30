@@ -6,7 +6,7 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/18 19:01:43 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 20:14:27 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:36:09 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	copy_line(const char *buf, char **str)
 		tmp = ft_strjoin(*str, buf);
 		if (!tmp)
 			return (-1);
-		free(*str);
+		wrfree(*str);
 		*str = tmp;
 	}
 	return (1);

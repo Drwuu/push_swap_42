@@ -1,19 +1,18 @@
 NAME		= push_swap
 
-SRCS		= \
-push_swap.c push.c swap.c rotate.c rotate_2.c utils.c utils_2.c utils_3.c sort.c \
-last_sort.c last_sort_2.c algorithm.c
-
-VPATH			= $(OBJS_DIR) $(FILES) $(INCLUDES) $(LIBFT_INC) $(LIBFT_PATH)
-
-OBJS_DIR		= ./objects
-FILES			= ./srcs
-LIBFT_PATH		= ./libft
-INCLUDES		= ./includes
-
 FLAGS			= -Wall -Wextra -Werror
 OPT				= -O3 -flto -Ofast -ffast-math -march=native
 LIBFT			= -L libft -lft
+
+OBJS_DIR		= objects
+INCLUDES		= includes
+LIBFT_PATH		= libft
+
+SRCS			= \
+				push_swap.c push.c swap.c rotate.c rotate_2.c utils.c utils_2.c \
+				utils_3.c sort.c last_sort.c last_sort_2.c algorithm.c
+FILES			= srcs
+FOLDERS			=
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 all:				libs $(NAME)
@@ -25,7 +24,7 @@ $(NAME):			$(OBJS)
 						@gcc $(FLAGS) $(LIBFT) $^ -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(GREEN)Compiled [√]$(RESET)\n"
 
-$(OBJS_DIR)/%.o:	%.c push_swap.h libft.a
+$(OBJS_DIR)/%.o:	$(FILES)/%.c $(addprefix $(INCLUDES)/, push_swap.h) $(LIBFT_PATH)/libft.a
 						@mkdir -p $(OBJS_DIR)
 						@gcc $(FLAGS) -I$(INCLUDES) -c $< -o $@
 						@printf "\033[2K\r$(BLUE)$(NAME)$(RESET)$(BLUE): $(PURPLE)$<$(RESET)"

@@ -6,12 +6,13 @@
 /*   By: lwourms <lwourms@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:28 by lwourms           #+#    #+#             */
-/*   Updated: 2021/05/16 20:35:02 by lwourms          ###   ########.fr       */
+/*   Updated: 2021/06/30 08:33:37 by lwourms          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/split_utils.h"
+#include "../includes/wr_malloc.h"
 
 static void	**process(const char *s, const char *sep, char ***split)
 {
@@ -48,7 +49,7 @@ char	**ft_split(const char *s, const char *sep)
 
 	if (!s)
 		return (NULL);
-	split = malloc(sizeof(*split) * (count_str(s, sep) + 1));
+	split = wrmalloc(sizeof(*split) * (count_str(s, sep) + 1));
 	if (!split)
 		return (NULL);
 	process(s, sep, &split);
